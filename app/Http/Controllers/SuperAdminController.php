@@ -4,13 +4,23 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Wisuda;
 
 class SuperAdminController extends Controller
 {
 
 
-
-
+    public function dashboard()
+    {
+        $wisudas = Wisuda::with('user')
+            ->where('validasi_bendahara', 1)
+            ->where('validasi_repo', 1)
+            ->where('validasi_skripsi', 1)
+            ->where('validasi_jurnal', 1)
+            ->where('validasi_perpus', 1)
+            ->get(); 
+        return view('superadmin.validasi.index', compact('wisudas'));
+    }
     public function index()
     {
         $users = User::all();
@@ -52,8 +62,13 @@ class SuperAdminController extends Controller
             'name' => $request->name,
             'username' => $request->username,
             'prodi' => $request->prodi,
+
             'role' => 'mahasiswa',
             'password' => bcrypt($request->username),
+        ]);
+        Wisuda:: Create([
+            'user_id'=>$request->username,
+            'validasi_bendara' => '1',
         ]);
 
         return redirect()->route('users.index')->with('success', 'User berhasil dibuat');

@@ -11,7 +11,10 @@ Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-
+Route::get('/', function () {
+    //return view('auth.login');php
+    return redirect()->route('login');
+});
 
 
 // Mahasiswa Routes
@@ -39,4 +42,17 @@ Route::middleware(['auth'])->group(function () {
 // Superadmin Routes
 Route::middleware(['auth'])->group(function () {
     Route::resource('superadmin/users', SuperAdminController::class);
+    Route::get('/superadmin/validasi', [SuperAdminController::class, 'dashboard'])->name('superadmin.validasi.index');
+});
+
+
+
+Route::get('/run-migrate', function () {
+    Artisan::call('migrate', ['--force' => true]);
+    return 'Migrasi berhasil dijalankan.';
+});
+
+Route::get('/run-seed', function () {
+    Artisan::call('db:seed UserSeeder', ['--force' => true]);
+    return 'Seeder berhasil dijalankan!';
 });

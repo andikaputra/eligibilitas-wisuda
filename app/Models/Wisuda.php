@@ -8,6 +8,7 @@ class Wisuda extends Model
     protected $fillable = [
         'user_id',
         'link_bukti_pembayaran',
+        'link_pasphoto',
         'link_repositori',
         'link_publish_jurnal',
         'link_bukti_skripsi',
@@ -23,6 +24,6 @@ class Wisuda extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id', 'username');
     }
 }

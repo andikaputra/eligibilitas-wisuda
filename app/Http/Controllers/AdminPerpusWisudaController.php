@@ -9,7 +9,7 @@ class AdminPerpusWisudaController extends Controller
 {
     public function index()
     {
-        $data = Wisuda::with('user')->get();
+        $data = Wisuda::with('user')->where('validasi_bendahara', 1)->get();
         return view('adminperpus.index', compact('data'));
     }
 

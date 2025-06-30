@@ -16,8 +16,7 @@
       <thead>
         <tr>
           <th>Nama Mahasiswa</th>
-          <th>Link Bukti Pembayaran</th>
-          <th>Status Validasi</th>
+          <th>Status</th>
           <th>Aksi</th>
         </tr>
       </thead>
@@ -25,10 +24,9 @@
         @foreach($wisudaList as $wisuda)
         <tr>
           <td>{{ $wisuda->user->name }}</td>
-          <td><a href="{{ $wisuda->link_bukti_pembayaran }}" target="_blank">Lihat Bukti</a></td>
           <td>
             @if($wisuda->validasi_bendahara)
-              <span class="badge bg-success">Tervalidasi</span>
+              <span class="badge bg-success">Tervalidasi Bayar</span>
             @else
               <span class="badge bg-warning text-dark">Belum</span>
             @endif

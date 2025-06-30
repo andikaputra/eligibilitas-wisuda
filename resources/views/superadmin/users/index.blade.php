@@ -1,15 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mt-4">
-    <h1 class="mb-4">Data Wisuda Mahasiswa</h1>
-
+<div class="card shadow mb-4">
+  <div class="card-header">
+    <h6 class="font-weight-bold text-primary">Daftar Wisuda - Validasi Pembayaran</h6>
+  </div>
+  <div class="card-body">
     @if(session('success'))
     <div class="alert alert-success">{{ session('success') }}</div>
     @endif
-  <a href="{{ route('users.create') }}" class="btn btn-secondary">Batal</a>
-    <table class="table table-bordered table-striped align-middle">
-        <thead class="table-dark">
+<span class="alert alert-primary d-block mb-3">
+  Pastikan Menambahkan Mahasiswa yang sudah melunasi pembayaran
+</span> 
+
+  <a href="{{ route('users.create') }}" class="btn btn-primary mb-4">Tambah User</a>
+    <table class="table table-bordered">
+        <thead >
             <tr>
                 <th>NIM</th>
                 <th>Nama</th>

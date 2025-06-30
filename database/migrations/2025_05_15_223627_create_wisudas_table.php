@@ -10,15 +10,16 @@ class CreateWisudasTable extends Migration
     {
         Schema::create('wisudas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('link_bukti_pembayaran');
-            $table->string('link_repositori');
-            $table->string('link_publish_jurnal');
-            $table->string('link_bukti_skripsi');
-            $table->string('link_bukti_perpus');
+            $table->string('user_id');
+            $table->string('link_bukti_pembayaran')->nullable();
+            $table->string('link_pasphoto')->nullable();
+            $table->string('link_repositori')->nullable();
+            $table->string('link_publish_jurnal')->nullable();
+            $table->string('link_bukti_skripsi')->nullable();
+            $table->string('link_bukti_perpus')->nullable();
 
             // Status validasi oleh bendahara dan admin_perpus
-            $table->boolean('validasi_bendahara')->default(false);
+            $table->boolean('validasi_bendahara')->default(true);
             $table->boolean('validasi_repo')->default(false);
             $table->boolean('validasi_jurnal')->default(false);
             $table->boolean('validasi_skripsi')->default(false);

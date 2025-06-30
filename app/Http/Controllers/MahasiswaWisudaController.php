@@ -10,7 +10,7 @@ class MahasiswaWisudaController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $data = Wisuda::where('user_id', $user->id)->first();
+        $data = Wisuda::where('user_id', $user->username)->first();
 
         return view('mahasiswa.wisuda', compact('data'));
     }
@@ -27,7 +27,7 @@ class MahasiswaWisudaController extends Controller
 
         $user = Auth::user();
         Wisuda::updateOrCreate(
-            ['user_id' => $user->id],
+            ['user_id' => $user->username],
             $request->only([
                 'link_bukti_pembayaran',
                 'link_repositori',

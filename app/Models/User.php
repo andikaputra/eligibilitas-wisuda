@@ -47,4 +47,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function wisudas()
+    {
+        return $this->hasMany(Wisuda::class, 'user_id', 'username');
+    }
 }

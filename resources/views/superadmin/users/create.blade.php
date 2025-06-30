@@ -10,16 +10,18 @@
 
     <form action="{{ route('users.store') }}" method="POST">
         @csrf
+        
+        <div class="mb-3">
+            <label for="username" class="form-label">NIM</label>
+            <input type="text" name="username" class="form-control" required>
+        </div>
 
         <div class="mb-3">
             <label for="name" class="form-label">Nama Lengkap</label>
             <input type="text" name="name" class="form-control" required>
         </div>
 
-        <div class="mb-3">
-            <label for="username" class="form-label">NIM</label>
-            <input type="text" name="username" class="form-control" required>
-        </div>
+
 
 
 
