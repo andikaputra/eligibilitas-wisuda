@@ -20,7 +20,7 @@
       <div class="mb-3">
         <label for="link_bukti_pembayaran" class="form-label">Link Pas Photo</label>
         <p class="alert alert-primary d-block mb-3">
-          masukkan link dari google drive dan pastikan sudah di share (File sudah di-share: Anyone with the link → Viewer)
+          masukkan link dari google drive dan pastikan sudah di share (File sudah di-share: Anyone with the link → Viewer) beserta foto bersama orang tua
         </p> 
         <input type="url" class="form-control @error('link_bukti_pembayaran') is-invalid @enderror" id="link_bukti_pembayaran"
           name="link_bukti_pembayaran" required value="{{ old('link_bukti_pembayaran', $data->link_bukti_pembayaran ?? '') }}">
@@ -36,9 +36,17 @@
       <!-- Link Repositori -->
       <div class="mb-3">
         <label for="link_repositori" class="form-label">Link Repositori</label>
+                                @if ($data->validasi_repo == '1')
+                                    <span class="badge bg-success">Sudah divalidasi</span>
+                                @elseif ($data->validasi_repo == '2')
+                                    <span class="badge bg-danger">Ditolak</span>
+                                @else
+                                    <span class="badge bg-warning text-dark">Belum divalidasi</span>
+                                @endif
         <p class="alert alert-primary d-block mb-3">
           masukkan link Skripsi yang sudah di publikasi di repo.markandeyabali.ac.id
         </p> 
+
         <input type="url" class="form-control @error('link_repositori') is-invalid @enderror" id="link_repositori"
           name="link_repositori" required value="{{ old('link_repositori', $data->link_repositori ?? '') }}">
         @error('link_repositori')
@@ -49,14 +57,23 @@
           <a href="{{ $data->link_repositori }}" target="_blank" class="btn btn-info w-100">Cek Repositori</a>
         </div>
         @endif
+
       </div>
 
       <!-- Link Publish Jurnal -->
       <div class="mb-3">
         <label for="link_publish_jurnal" class="form-label">Link Publish Jurnal</label>
+                                @if ($data->validasi_jurnal == '1')
+                                    <span class="badge bg-success">Sudah divalidasi</span>
+                                @elseif ($data->validasi_jurnal == '2')
+                                    <span class="badge bg-danger">Ditolak</span>
+                                @else
+                                    <span class="badge bg-warning text-dark">Belum divalidasi</span>
+                                @endif
         <p class="alert alert-primary d-block mb-3">
           masukkan link jurnal yang sudah publish atau LOA
         </p> 
+
         <input type="url" class="form-control @error('link_publish_jurnal') is-invalid @enderror"
           id="link_publish_jurnal" name="link_publish_jurnal" required
           value="{{ old('link_publish_jurnal', $data->link_publish_jurnal ?? '') }}">
@@ -73,6 +90,13 @@
       <!-- Link Bukti Skripsi -->
       <div class="mb-3">
         <label for="link_bukti_skripsi" class="form-label">Link Bukti Pengumpulan Skripsi</label>
+                                @if ($data->validasi_skripsi == '1')
+                                    <span class="badge bg-success">Sudah divalidasi</span>
+                                @elseif ($data->validasi_skripsi == '2')
+                                    <span class="badge bg-danger">Ditolak</span>
+                                @else
+                                    <span class="badge bg-warning text-dark">Belum divalidasi</span>
+                                @endif
         <input type="url" class="form-control @error('link_bukti_skripsi') is-invalid @enderror"
           id="link_bukti_skripsi" name="link_bukti_skripsi" required
           value="{{ old('link_bukti_skripsi', $data->link_bukti_skripsi ?? '') }}">
@@ -89,6 +113,13 @@
       <!-- Link Bukti Perpus -->
       <div class="mb-3">
         <label for="link_bukti_perpus" class="form-label">Link Bukti Bebas Perpus</label>
+                                @if ($data->validasi_perpus == '1')
+                                    <span class="badge bg-success">Sudah divalidasi</span>
+                                @elseif ($data->validasi_perpus == '2')
+                                    <span class="badge bg-danger">Ditolak</span>
+                                @else
+                                    <span class="badge bg-warning text-dark">Belum divalidasi</span>
+                                @endif
         <input type="url" class="form-control @error('link_bukti_perpus') is-invalid @enderror"
           id="link_bukti_perpus" name="link_bukti_perpus" required
           value="{{ old('link_bukti_perpus', $data->link_bukti_perpus ?? '') }}">

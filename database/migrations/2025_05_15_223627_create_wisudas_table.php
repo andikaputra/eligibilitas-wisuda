@@ -19,11 +19,11 @@ class CreateWisudasTable extends Migration
             $table->string('link_bukti_perpus')->nullable();
 
             // Status validasi oleh bendahara dan admin_perpus
-            $table->boolean('validasi_bendahara')->default(true);
-            $table->boolean('validasi_repo')->default(false);
-            $table->boolean('validasi_jurnal')->default(false);
-            $table->boolean('validasi_skripsi')->default(false);
-            $table->boolean('validasi_perpus')->default(false);
+            $table->integer('validasi_bendahara')->default(0);
+            $table->integer('validasi_repo')->default(0);
+            $table->integer('validasi_jurnal')->default(0);
+            $table->integer('validasi_skripsi')->default(0);
+            $table->integer('validasi_perpus')->default(0);
 
             $table->timestamps();
         });

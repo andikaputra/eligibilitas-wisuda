@@ -37,6 +37,12 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/adminperpus/wisuda/{id}/validasi/skripsi', [AdminPerpusWisudaController::class, 'validasiskripsi'])->name('adminperpus.wisuda.validasiskripsi');
     Route::post('/adminperpus/wisuda/{id}/validasi/perpus', [AdminPerpusWisudaController::class, 'validasiperpus'])->name('adminperpus.wisuda.validasiperpus');
 
+
+    Route::post('/adminperpus/wisuda/{id}/reject/repo', [AdminPerpusWisudaController::class, 'rejectrepo'])->name('adminperpus.wisuda.rejectrepo');
+    Route::post('/adminperpus/wisuda/{id}/reject/jurnal', [AdminPerpusWisudaController::class, 'rejectjurnal'])->name('adminperpus.wisuda.rejectjurnal');
+    Route::post('/adminperpus/wisuda/{id}/reject/skripsi', [AdminPerpusWisudaController::class, 'rejectskripsi'])->name('adminperpus.wisuda.rejectskripsi');
+    Route::post('/adminperpus/wisuda/{id}/reject/perpus', [AdminPerpusWisudaController::class, 'rejectperpus'])->name('adminperpus.wisuda.rejectperpus');
+
 });
 
 // Superadmin Routes

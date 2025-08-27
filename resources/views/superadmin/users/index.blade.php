@@ -14,21 +14,26 @@
 </span> 
 
   <a href="{{ route('users.create') }}" class="btn btn-primary mb-4">Tambah User</a>
-    <table class="table table-bordered">
+    <table class="table table-bordered" id="dataTable">
         <thead >
             <tr>
+                <th>Tanggal</th>
                 <th>NIM</th>
                 <th>Nama</th>
                 <th>Prodi</th>
+                <th>Kirim Notifikasi</th>
             </tr>
         </thead>
         <tbody>
             @foreach($users as $d)
             @if($d->role == "mahasiswa")
                 <tr>
+                    <td>{{ $d->created_at }}</td>
                     <td>{{ $d->username }}</td>
                     <td>{{ $d->name }}</td>
                     <td>{{ $d->prodi}}</td>
+                    <td>    
+                        <a href="https://wa.me/{{ $d->wa }}?text=Kami%20dari%20panitia%20Wisuda%0AMohon%20lengkapi%20data%20pendaftaran%20wisuda%20anda%20melalui%20link%20wisuda.markandeyabali.ac.id%0Amenggunakan%0Auser%20:%20nim%20anda%0Apassword%20:%20nim%20anda%0Aterima%20kasih" " target="_blank" class="btn btn-success btn-sm">Chat WA</a></td>
                 </tr>
             @endif
             @endforeach

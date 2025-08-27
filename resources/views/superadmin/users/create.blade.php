@@ -20,6 +20,13 @@
             <label for="name" class="form-label">Nama Lengkap</label>
             <input type="text" name="name" class="form-control" required>
         </div>
+        <div class="mb-3">
+            <label for="wa" class="form-label">No WA</label>
+            <div class="input-group">
+                <span class="input-group-text">62</span>
+                <input type="text" name="wa" class="form-control" required>
+            </div>
+        </div>
 
 
 

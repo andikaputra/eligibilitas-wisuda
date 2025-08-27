@@ -15,6 +15,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('prodi');
             $table->enum('role', ['superadmin', 'admin_perpus', 'mahasiswa', 'bendahara']);
+            $table->string('wa');
             $table->rememberToken();
             $table->timestamps();
         });

@@ -10,10 +10,9 @@
     <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-        <table class="table table-bordered">
+        <table class="table table-bordered" id="dataTable">
             <thead>
                 <tr>
-                    <th>ID</th>
                     <th>NIM</th>
                     <th>Nama</th>
                     <th>LINK</th>
@@ -24,97 +23,130 @@
             <tbody>
                 @foreach($data as $wisuda)
                     <tr>
-                        <td>{{ $wisuda->id }}</td>
                         <td>{{ $wisuda->user->username }}</td>
                         <td>{{ $wisuda->user->name }}</td>
                         <td>
                             <div class="mb-2">
-                                <a class="btn btn-primary w-100" href="{{ $wisuda->link_repositori }}" target="_blank">CEK REPO</a>
+                                @if ($wisuda->link_repositori)
+                                    <a class="btn btn-primary w-100" href="{{ $wisuda->link_repositori }}" target="_blank">CEK REPO</a>
+                                @else
+                                    Belum ada data
+                                @endif
+                            </div>
+
+                            <div class="mb-2">
+                                @if ($wisuda->link_publish_jurnal)
+                                    <a class="btn btn-primary w-100" href="{{ $wisuda->link_publish_jurnal }}" target="_blank">CEK JURNAL</a>
+                                 @else
+                                    Belum ada data 
+                                @endif
                             </div>
                             <div class="mb-2">
-                                <a class="btn btn-primary w-100" href="{{ $wisuda->link_publish_jurnal }}" target="_blank">CEK JURNAL</a>
+                                @if ($wisuda->link_bukti_skripsi)
+                                    <a class="btn btn-primary w-100" href="{{ $wisuda->link_bukti_skripsi }}" target="_blank">CEK BUKTI SKRIPSI</a>
+                                 @else
+                                    Belum ada data
+                                @endif
                             </div>
                             <div class="mb-2">
-                                <a class="btn btn-primary w-100" href="{{ $wisuda->link_bukti_skripsi }}" target="_blank">CEK BUKTI SKRIPSI</a>
-                            </div>
-                            <div class="mb-2">
+                                 @if ($wisuda->link_bukti_perpus)
                                 <a class="btn btn-primary w-100" href="{{ $wisuda->link_bukti_perpus }}" target="_blank">CEK BUKTI PERPUS</a>
+                                @else
+                                    Belum ada data
+                                @endif
                             </div>
                         </td>
 
                         <td>
                             <div class="mb-2">
                                 <strong>Repository:</strong> 
-                                <span class="{{ $wisuda->validasi_repo == '1' ? 'badge bg-success' : 'badge bg-warning text-dark' }}">
-                                    {{ $wisuda->validasi_repo == '1' ? 'Sudah divalidasi' : 'Belum divalidasi' }}
-                                </span>
+                                @if ($wisuda->validasi_repo == '1')
+                                    <span class="badge bg-success">Sudah divalidasi</span>
+                                @elseif ($wisuda->validasi_repo == '2')
+                                    <span class="badge bg-danger">Ditolak</span>
+                                @else
+                                    <span class="badge bg-warning text-dark">Belum divalidasi</span>
+                                @endif
                             </div>
                             
                             <div class="mb-2">
-                                <strong>Jurnal:</strong> 
-                                <span class="{{ $wisuda->validasi_jurnal == '1' ? 'badge bg-success' : 'badge bg-warning text-dark' }}">
-                                    {{ $wisuda->validasi_jurnal == '1' ? 'Sudah Tervalidasi' : 'Belum divalidasi' }}
-                                </span>
+                                <strong>Jurnal:</strong>
+                                @if ($wisuda->validasi_jurnal == '1')
+                                    <span class="badge bg-success">Sudah divalidasi</span>
+                                @elseif ($wisuda->validasi_jurnal == '2')
+                                    <span class="badge bg-danger">Ditolak</span>
+                                @else
+                                    <span class="badge bg-warning text-dark">Belum divalidasi</span>
+                                @endif
                             </div>
                             
                             <div class="mb-2">
-                                <strong>Skripsi:</strong> 
-                                <span class="{{ $wisuda->validasi_skripsi == '1' ? 'badge bg-success' : 'badge bg-warning text-dark' }}">
-                                    {{ $wisuda->validasi_skripsi == '1' ? 'Sudah Tervalidasi' : 'Belum divalidasi' }}
-                                </span>
+                                <strong>Skripsi:</strong>
+                                @if ($wisuda->validasi_skripsi == '1')
+                                    <span class="badge bg-success">Sudah divalidasi</span>
+                                @elseif ($wisuda->validasi_skripsi == '2')
+                                    <span class="badge bg-danger">Ditolak</span>
+                                @else
+                                    <span class="badge bg-warning text-dark">Belum divalidasi</span>
+                                @endif
                             </div>
                             
                             <div class="mb-2">
                                 <strong>Bebas Perpus:</strong> 
-                                <span class="{{ $wisuda->validasi_perpus == '1' ? 'badge bg-success' : 'badge bg-warning text-dark' }}">
-                                    {{ $wisuda->validasi_perpus == '1' ? 'Sudah Tervalidasi' : 'Belum divalidasi' }}
-                                </span>
+                                @if ($wisuda->validasi_perpus == '1')
+                                    <span class="badge bg-success">Sudah divalidasi</span>
+                                @elseif ($wisuda->validasi_perpus == '2')
+                                    <span class="badge bg-danger">Ditolak</span>
+                                @else
+                                    <span class="badge bg-warning text-dark">Belum divalidasi</span>
+                                @endif
                             </div>
                         </td>
                         
                         <td>
                             <div class="mb-2">
-                                @if($wisuda->validasi_repo != 1)
                                     <form method="POST" action="{{ route('adminperpus.wisuda.validasirepo', $wisuda->id) }}">
                                         @csrf
                                         <button class="btn btn-primary w-100" type="submit">Validasi Repo</button>
                                     </form>
-                                @else
-                                    <span class="text-success">-</span>
-                                @endif
+                                    <form method="POST" action="{{ route('adminperpus.wisuda.rejectrepo', $wisuda->id) }}">
+                                        @csrf
+                                        <button class="btn btn-danger w-100" type="submit">Reject Repo</button>
+                                    </form>
                             </div>
 
                             <div class="mb-2">
-                                @if($wisuda->validasi_jurnal != 1)
                                     <form method="POST" action="{{ route('adminperpus.wisuda.validasijurnal', $wisuda->id) }}">
                                         @csrf
                                         <button class="btn btn-primary w-100" type="submit">Validasi Jurnal</button>
                                     </form>
-                                @else
-                                    <span class="text-success">-</span>
-                                @endif
+                                    <form method="POST" action="{{ route('adminperpus.wisuda.rejectjurnal', $wisuda->id) }}">
+                                        @csrf
+                                        <button class="btn btn-danger w-100" type="submit">Reject Jurnal</button>
+                                    </form>
                             </div>
 
                             <div class="mb-2">
-                                @if($wisuda->validasi_skripsi != 1)
+
                                     <form method="POST" action="{{ route('adminperpus.wisuda.validasiskripsi', $wisuda->id) }}">
                                         @csrf
                                         <button class="btn btn-primary w-100" type="submit">Validasi Skripsi</button>
                                     </form>
-                                @else
-                                    <span class="text-success">-</span>
-                                @endif
+                                    <form method="POST" action="{{ route('adminperpus.wisuda.rejectskripsi', $wisuda->id) }}">
+                                        @csrf
+                                        <button class="btn btn-danger w-100" type="submit">Reject Skripsi</button>
+                                    </form>
                             </div>
 
                             <div class="mb-2">
-                                @if($wisuda->validasi_perpus != 1)
                                     <form method="POST" action="{{ route('adminperpus.wisuda.validasiperpus', $wisuda->id) }}">
                                         @csrf
-                                        <button class="btn btn-primary w-100" type="submit">Validasi Bebas Perpus</button>
+                                        <button class="btn btn-primary w-100" type="submit" >Validasi Bebas Perpus</button>
                                     </form>
-                                @else
-                                    <span class="text-success">-</span>
-                                @endif
+                                    <form method="POST" action="{{ route('adminperpus.wisuda.rejectperpus', $wisuda->id) }}">
+                                        @csrf
+                                        <button class="btn btn-danger w-100" type="submit">Reject Perpus</button>
+                                    </form>
                             </div>
                         </td>
                     </tr>

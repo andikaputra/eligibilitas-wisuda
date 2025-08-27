@@ -21,9 +21,10 @@ class SuperAdminController extends Controller
             ->get(); 
         return view('superadmin.validasi.index', compact('wisudas'));
     }
+    
     public function index()
     {
-        $users = User::all();
+        $users = User::orderBy('created_at', 'desc')->get();
         return view('superadmin.users.index', compact('users'));
     }
 
@@ -56,12 +57,14 @@ class SuperAdminController extends Controller
             'name' => 'required|string|max:255',
             'username' => 'required|string|unique:users',
             'prodi' => 'required|string',
+            'wa' => 'required|string',
         ]);
 
         User::create([
             'name' => $request->name,
             'username' => $request->username,
             'prodi' => $request->prodi,
+            'wa' => '62' . ltrim($request->wa, '0'),
 
             'role' => 'mahasiswa',
             'password' => bcrypt($request->username),

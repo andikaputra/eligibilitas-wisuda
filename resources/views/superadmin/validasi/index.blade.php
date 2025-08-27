@@ -12,7 +12,7 @@
     <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    <table class="table table-bordered">
+    <table class="table table-bordered" id="dataTable">
       <thead>
         <tr>
             <th>Photo</th>
@@ -24,7 +24,7 @@
       <tbody>
         @foreach($wisudas as $wisuda)
         <tr>
-            <td><iframe src="{{ \App\Helpers\DriveHelper::getDriveThumbnailUrl($wisuda->link_bukti_pembayaran) }}" width="151" height="227" ></iframe></td>
+            <td>{{$wisuda->link_bukti_pembayaran}}</td>
 
             <td>{{ $wisuda->user->username }}</td>
             <td>{{ $wisuda->user->name }}</td>

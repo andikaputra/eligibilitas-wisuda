@@ -69,6 +69,43 @@
 
 
   @stack('scripts')
+
+      <!-- jQuery & DataTables JS -->
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- DataTables -->
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+
+
+
+
+<script>
+    $(document).ready(function () {
+        $('#dataTable').DataTable({
+            responsive: true,
+            pageLength: 10,
+            lengthMenu: [5, 10, 25, 50],
+            stateSave: true, 
+            language: {
+                search: "Cari:",
+                lengthMenu: "Tampilkan _MENU_ entri",
+                info: "Menampilkan _START_ - _END_ dari _TOTAL_ entri",
+                paginate: {
+                    previous: "Sebelumnya",
+                    next: "Berikutnya"
+                },
+                zeroRecords: "Tidak ditemukan data yang cocok"
+            }
+        });
+    });
+
+
+    
+</script>
+
+
 </body>
 
 </html>
