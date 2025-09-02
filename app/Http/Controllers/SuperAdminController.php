@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Wisuda;
+use Barryvdh\DomPDF\Facade\Pdf;
+
 
 class SuperAdminController extends Controller
 {
@@ -106,5 +108,15 @@ class SuperAdminController extends Controller
     {
         $user->delete();
         return redirect()->route('users.index')->with('success', 'User berhasil dihapus');
+    }
+
+    public function exportPdf()
+    {
+        $data = Wisuda::with('user')->get();
+
+        $pdf = Pdf::loadView('wisuda.export-pdf', compact('data'))
+                ->setPaper('a4', 'landscape');
+
+        return $pdf->download('daftar-wisuda.pdf');
     }
 }

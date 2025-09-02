@@ -43,6 +43,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/adminperpus/wisuda/{id}/reject/skripsi', [AdminPerpusWisudaController::class, 'rejectskripsi'])->name('adminperpus.wisuda.rejectskripsi');
     Route::post('/adminperpus/wisuda/{id}/reject/perpus', [AdminPerpusWisudaController::class, 'rejectperpus'])->name('adminperpus.wisuda.rejectperpus');
 
+    Route::get('/wisuda/export-pdf', [SuperAdminController::class, 'exportPdf'])->name('wisuda.exportPdf');
 });
 
 // Superadmin Routes

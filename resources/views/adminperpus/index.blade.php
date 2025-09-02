@@ -3,7 +3,12 @@
 @section('content')
 <div class="card shadow mb-4">
   <div class="card-header">
-    <h6 class="font-weight-bold text-primary">Daftar Wisuda - Validasi Pembayaran</h6>
+    <h6 class="font-weight-bold text-primary">Daftar Wisuda - Administrasi</h6>
+    <div class="mb-3">
+    <a href="{{ route('wisuda.exportPdf') }}" class="btn btn-danger">
+        Export PDF
+    </a>
+</div>
   </div>
   <div class="card-body">
     @if(session('success'))
@@ -13,6 +18,7 @@
         <table class="table table-bordered" id="dataTable">
             <thead>
                 <tr>
+                    <th>Foto</th>
                     <th>NIM</th>
                     <th>Nama</th>
                     <th>LINK</th>
@@ -23,6 +29,13 @@
             <tbody>
                 @foreach($data as $wisuda)
                     <tr>
+                                    <td>        
+            <a href="{{ $wisuda->link_bukti_pembayaran }}" 
+              target="_blank" 
+              class="btn btn-primary btn-sm">
+            Lihat Foto
+            </a>
+            </td>
                         <td>{{ $wisuda->user->username }}</td>
                         <td>{{ $wisuda->user->name }}</td>
                         <td>
