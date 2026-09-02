@@ -482,18 +482,34 @@ Route::middleware(['auth'])->group(function () {
 
 /*
 |--------------------------------------------------------------------------
-| ROUTE MIGRASI
+| ROUTE MIGRASI & CLEAR CACHE (SERVER UTILITY)
 |--------------------------------------------------------------------------
 */
 
 Route::get('/run-migrate', function () {
+    try {
+        Artisan::call('migrate', [
+            '--force' => true
+        ]);
 
-    Artisan::call('migrate', [
-        '--force' => true
-    ]);
+        $output = Artisan::output();
+        return "<pre style='color:green;font-size:16px;background:#f8f9fa;padding:20px;border-radius:8px;'><b>Migrasi Berhasil Dijalankan!</b>\n\nOutput:\n" . htmlspecialchars($output ?: 'Tidak ada migrasi baru (Database up to date).') . "</pre>";
+    } catch (\Throwable $e) {
+        return "<pre style='color:red;font-size:16px;background:#fff0f0;padding:20px;border-radius:8px;'><b>Terjadi Kendala saat Migrasi:</b>\n" . htmlspecialchars($e->getMessage()) . "\n\nDi: " . $e->getFile() . " (baris " . $e->getLine() . ")</pre>";
+    }
+});
 
-    return 'Migrasi berhasil dijalankan.';
+Route::get('/run-clear', function () {
+    try {
+        Artisan::call('config:clear');
+        Artisan::call('cache:clear');
+        Artisan::call('view:clear');
+        Artisan::call('route:clear');
 
+        return "<pre style='color:green;font-size:16px;background:#f8f9fa;padding:20px;border-radius:8px;'><b>Cache Berhasil Dibersihkan!</b></pre>";
+    } catch (\Throwable $e) {
+        return "<pre style='color:red;font-size:16px;background:#fff0f0;padding:20px;border-radius:8px;'><b>Error:</b>\n" . htmlspecialchars($e->getMessage()) . "</pre>";
+    }
 });
 
 
