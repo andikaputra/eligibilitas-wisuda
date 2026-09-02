@@ -16,6 +16,8 @@ Homestead.yaml
 npm-debug.log
 yarn-error.log
 /auth.json
+/storage/app/google/*.json
+service-account*.json
 /.fleet
 /.idea
 /.nova

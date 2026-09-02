@@ -19,6 +19,13 @@
         </div>
     @endif
 
+    @if (session('success'))
+        <div class="alert alert-success">
+            <i class="fas fa-check-circle mr-2"></i>
+            {{ session('success') }}
+        </div>
+    @endif
+
     <form method="POST" action="{{ route('login') }}">
         @csrf
 
@@ -35,6 +42,14 @@
         <div class="d-grid gap-2">
             <button type="submit" class="btn btn-primary">Login</button>
         </div>
+
+        <div class="text-center mt-3">
+            <span class="text-muted">Belum memiliki akun?</span>
+            <a href="{{ route('register') }}">
+                Registrasi 
+            </a>
+        </div>
+
     </form>
 </div>
 

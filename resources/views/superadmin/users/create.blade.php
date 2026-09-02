@@ -43,6 +43,20 @@
             </select>
         </div>
 
+        <!-- Tahun Angkatan -->
+        <div class="mb-3">
+            <label for="angkatan" class="form-label">Tahun Angkatan <span class="text-danger">*</span></label>
+            <select name="angkatan" class="form-control" required>
+                <option value="">-- Pilih Tahun Angkatan --</option>
+                @php $curYear = (int)date('Y'); @endphp
+                @for ($y = $curYear + 1; $y >= $curYear - 10; $y--)
+                    <option value="{{ $y }}" {{ old('angkatan', '2022') == $y ? 'selected' : '' }}>
+                        Angkatan {{ $y }}
+                    </option>
+                @endfor
+            </select>
+            <small class="text-muted">Pilih tahun angkatan mahasiswa yang ditambahkan.</small>
+        </div>
 
         <button type="submit" class="btn btn-primary">Simpan</button>
     </form>

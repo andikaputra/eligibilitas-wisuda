@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Ijazah;
 
 class User extends Authenticatable
 {
@@ -18,12 +19,14 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-       'name',
+        'name',
         'username',
         'password',
         'prodi',
+        'angkatan',
         'wa',
         'role',
+        'link_skpi',
     ];
 
     /**
@@ -53,4 +56,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Wisuda::class, 'user_id', 'username');
     }
+
+    public function ijazah()
+    {
+        return $this->hasOne(Ijazah::class);
+    }
+
 }
